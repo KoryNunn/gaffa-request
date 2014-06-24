@@ -1,0 +1,30 @@
+{
+  "name": "gaffa-request",
+  "author": "Kory Nunn <knunn187@gmail.com>",
+  "version": "1.0.0",
+  "main": "request.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KoryNunn/gaffa-request.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KoryNunn/gaffa-request/issues"
+  },
+  "keywords": [
+    "gaffa",
+    "request",
+    "ajax",
+    "sockets",
+    "long poll",
+    "file system"
+  ],
+  "peerDependencies": {
+    "gaffa": "^1.4.3"
+  },
+  "license": "MIT",
+  "description": "Request action for gaffa. Allows for arbitrary asynchronous messaging via a common action.",
+  "homepage": "https://github.com/KoryNunn/gaffa-request",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
