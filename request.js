@@ -36,7 +36,7 @@ Request.prototype.trigger = function(parent, scope, event){
             action.triggerActions('success', scope, event);
         }
 
-        this.loading.set(false);
+        action.loading.set(false);
         action.emit('complete');
         action.triggerActions('complete', scope, event);
     });
