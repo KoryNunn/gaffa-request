@@ -7,6 +7,8 @@ Request.prototype.trigger = function(parent, scope, event){
     var action = this,
         scope = scope || {};
 
+    this.loading.set(true);
+
     Request.handle(this, this.name.value, this.options.value, function(error, data){
         if(error){
 
@@ -34,6 +36,7 @@ Request.prototype.trigger = function(parent, scope, event){
             action.triggerActions('success', scope, event);
         }
 
+        this.loading.set(false);
         action.emit('complete');
         action.triggerActions('complete', scope, event);
     });
@@ -44,6 +47,7 @@ Request.prototype.errors = new Gaffa.Property();
 Request.prototype.cleans = new Gaffa.Property();
 Request.prototype.options = new Gaffa.Property();
 Request.prototype.name = new Gaffa.Property();
+Request.prototype.loading = new Gaffa.Property();
 Request.handle = function(action, name, options, callback){
     for(var i = 0; i < this.providers.length; i++){
         if(this.providers[i](action, name, options, callback)){
