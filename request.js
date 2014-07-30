@@ -45,7 +45,9 @@ Request.prototype.trigger = function(parent, scope, event){
 Request.prototype.target = new Gaffa.Property();
 Request.prototype.source = new Gaffa.Property();
 Request.prototype.errors = new Gaffa.Property();
-Request.prototype.cleans = new Gaffa.Property();
+Request.prototype.cleans = new Gaffa.Property({
+    value: true
+});
 Request.prototype.options = new Gaffa.Property();
 Request.prototype.name = new Gaffa.Property();
 Request.prototype.loading = new Gaffa.Property();
