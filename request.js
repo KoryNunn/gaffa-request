@@ -3,6 +3,7 @@ var Gaffa = require('gaffa');
 function Request(){}
 Request = Gaffa.createSpec(Request, Gaffa.Action);
 Request.prototype._type = 'request';
+Request.prototype._async = true;
 Request.prototype.trigger = function(parent, scope, event){
     var action = this,
         scope = scope || {};
@@ -54,6 +55,7 @@ Request.handle = function(action, name, options, callback){
             return;
         }
     }
+    console.warn('No handler matched the name: ' + name);
 };
 Request.providers = [];
 
