@@ -19,7 +19,7 @@
     "file system"
   ],
   "peerDependencies": {
-    "gaffa": "^1.4.3"
+    "gaffa": "^1.14.2"
   },
   "license": "MIT",
   "description": "Request action for gaffa. Allows for arbitrary asynchronous messaging via a common action.",

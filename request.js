@@ -11,6 +11,8 @@ Request.prototype.trigger = function(parent, scope, event){
     this.loading.set(true);
 
     Request.handle(this, this.name.value, this.options.value, function(error, data){
+        action.loading.set(false);
+        
         if(error){
 
             scope.error = error;
@@ -26,18 +28,17 @@ Request.prototype.trigger = function(parent, scope, event){
                     error: error
                 });
             }
-            action.errors.set(error, action.cleans === false);
+            action.errors.set(error, null, scope);
             action.triggerActions('error', scope, event);
         }else{
 
             scope.data = data;
 
             action.emit('success', data);
-            action.target.set(data, action.cleans === false);
+            action.target.set(data, null, scope);
             action.triggerActions('success', scope, event);
         }
 
-        action.loading.set(false);
         action.emit('complete');
         action.triggerActions('complete', scope, event);
     });
@@ -45,9 +46,6 @@ Request.prototype.trigger = function(parent, scope, event){
 Request.prototype.target = new Gaffa.Property();
 Request.prototype.source = new Gaffa.Property();
 Request.prototype.errors = new Gaffa.Property();
-Request.prototype.cleans = new Gaffa.Property({
-    value: true
-});
 Request.prototype.options = new Gaffa.Property();
 Request.prototype.name = new Gaffa.Property();
 Request.prototype.loading = new Gaffa.Property();
