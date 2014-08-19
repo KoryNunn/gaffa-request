@@ -9,6 +9,8 @@ Request.prototype.trigger = function(parent, scope, event){
 
     this.loading.set(true);
 
+    this.on('complete', action.loading.set.bind(action.loading, false));
+
     Request.handle(this, this.name.value, this.options.value, function(error, data){
         if(error){
 
@@ -36,8 +38,7 @@ Request.prototype.trigger = function(parent, scope, event){
             action.triggerActions('success', scope, event);
         }
 
-        action.loading.set(false);
-        action.emit('complete');
+        action.complete();
         action.triggerActions('complete', scope, event);
     });
 };
