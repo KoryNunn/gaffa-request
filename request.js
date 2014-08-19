@@ -3,6 +3,7 @@ var Gaffa = require('gaffa');
 function Request(){}
 Request = Gaffa.createSpec(Request, Gaffa.Action);
 Request.prototype._type = 'request';
+Request.prototype._async = true;
 Request.prototype.trigger = function(parent, scope, event){
     var action = this,
         scope = scope || {};
@@ -12,6 +13,8 @@ Request.prototype.trigger = function(parent, scope, event){
     this.on('complete', action.loading.set.bind(action.loading, false));
 
     Request.handle(this, this.name.value, this.options.value, function(error, data){
+        action.loading.set(false);
+
         if(error){
 
             scope.error = error;
@@ -27,14 +30,14 @@ Request.prototype.trigger = function(parent, scope, event){
                     error: error
                 });
             }
-            action.errors.set(error, action.cleans === false);
+            action.errors.set(error, null, scope);
             action.triggerActions('error', scope, event);
         }else{
 
             scope.data = data;
 
             action.emit('success', data);
-            action.target.set(data, action.cleans === false);
+            action.target.set(data, null, scope);
             action.triggerActions('success', scope, event);
         }
 
@@ -45,7 +48,6 @@ Request.prototype.trigger = function(parent, scope, event){
 Request.prototype.target = new Gaffa.Property();
 Request.prototype.source = new Gaffa.Property();
 Request.prototype.errors = new Gaffa.Property();
-Request.prototype.cleans = new Gaffa.Property();
 Request.prototype.options = new Gaffa.Property();
 Request.prototype.name = new Gaffa.Property();
 Request.prototype.loading = new Gaffa.Property();
@@ -55,6 +57,7 @@ Request.handle = function(action, name, options, callback){
             return;
         }
     }
+    console.warn('No handler matched the name: ' + name);
 };
 Request.providers = [];
 
