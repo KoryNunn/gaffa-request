@@ -41,8 +41,8 @@ Request.prototype.trigger = function(parent, scope, event){
             action.triggerActions('success', scope, event);
         }
 
-        action.complete();
         action.triggerActions('complete', scope, event);
+        action.complete();
     });
 };
 Request.prototype.target = new Gaffa.Property();
